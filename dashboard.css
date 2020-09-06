@@ -184,14 +184,15 @@ flex-direction: column;
  line-height: 30px;
 }
 
-.time_period_list{
+.time_slice_container{
   position: absolute;
   top:150px;
   width:100%;
   height:auto;
   border: 2px solid green;
+  list-style: none;
 }
-.time_slice{
+.time_slice_item{
   height:30px;
   border:2px solid orange;
   font-size: 20px;

@@ -5,14 +5,13 @@ const start_end_button = document.querySelector('.timer')
 const time_counting = document.querySelector('.time_counting')
 let temp_record
 let count = 0
-const TIM_SLICE_LIST_KEY = 'time_slice_item';
-const SELECTED_TIM_SLICE_LIST_ID_KEY = 'time_slice_id';
+const TIME_SLICE_LIST_KEY = 'time_slice_item';
+const SELECTED_TIME_SLICE_ID_KEY = 'time_slice_id';
 
 // time slice container
-let time_slice_container = JSON.parse(localStorage.getItem(TIM_SLICE_LIST_KEY)) || [];
-let selectedListId = localStorage.getItem(SELECTED_TIM_SLICE_LIST_ID_KEY);
-
-
+let storage_list = JSON.parse(localStorage.getItem(TIME_SLICE_LIST_KEY)) || [];
+let selectedListId = localStorage.getItem(SELECTED_TIME_SLICE_ID_KEY);
+const time_slice_container = document.querySelector('.time_slice_container')
 
 
 const user_name = document.querySelector('.user_name')
@@ -48,7 +47,6 @@ open_close_btn.addEventListener('click', function () {
 
 // click event, when click the start-stop button, the time slice will be created
 start_end_button.addEventListener('click', function () {
-
   if (start_end_button.textContent.toLowerCase() === "start") {
     start_end_button.textContent = "Stop"
     start_end_button.style.backgroundColor = "red";
@@ -57,15 +55,24 @@ start_end_button.addEventListener('click', function () {
       count += 1
       time_counting.textContent = count
     }, 1000)
-
-  } else {
+  }
+  else
+  {
     start_end_button.textContent = "Start"
     start_end_button.style.backgroundColor = "#3B7C94"
     clearInterval(temp_record)
+    time_counting.textContent = "00:00:00"
+    // console.log(count)
+    const newTimeSlice = populateTimeSlice(count)
+    storage_list.push(newTimeSlice)
+    console.log(JSON.stringify(storage_list))
+    count = 0
+    saveDataToLocalStorage()
+    updateTimeSliceContainer()
   }
 })
 
-// this function is used to populate an time slice object,which will be add to the local storage container later
+// populate an time slice object,which will be add to the local storage container later
 function populateTimeSlice(time_slice) {
   return {
     id: Date.now().toString(),
@@ -73,7 +80,20 @@ function populateTimeSlice(time_slice) {
   }
 }
 
+// formart the time slice
+function timeFormat(count){
+return
+}
 
+// update local storage time slice container, clear the
+function updateTimeSliceContainer(){
+  return
+}
+
+// save time slice to local storage: key value
+function saveDataToLocalStorage(){
+  localStorage.setItem(TIME_SLICE_LIST_KEY,JSON.stringify(storage_list))
+}
 
 
 
