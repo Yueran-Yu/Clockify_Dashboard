@@ -1,4 +1,5 @@
 window.addEventListener('load', function () {
+  disPlayTimeSliceItems()
 })
 
 const start_end_button = document.querySelector('.timer')
@@ -56,8 +57,7 @@ start_end_button.addEventListener('click', function () {
       time_counting.textContent = count
     }, 1000)
   }
-  else
-  {
+  else {
     start_end_button.textContent = "Start"
     start_end_button.style.backgroundColor = "#3B7C94"
     clearInterval(temp_record)
@@ -69,6 +69,7 @@ start_end_button.addEventListener('click', function () {
     count = 0
     saveDataToLocalStorage()
     updateTimeSliceContainer()
+    disPlayTimeSliceItems()
   }
 })
 
@@ -81,20 +82,34 @@ function populateTimeSlice(time_slice) {
 }
 
 // formart the time slice
-function timeFormat(count){
-return
+function timeFormat(count) {
+  return
 }
 
 // update local storage time slice container, clear the
-function updateTimeSliceContainer(){
+function updateTimeSliceContainer() {
   return
 }
 
 // save time slice to local storage: key value
-function saveDataToLocalStorage(){
-  localStorage.setItem(TIME_SLICE_LIST_KEY,JSON.stringify(storage_list))
+function saveDataToLocalStorage() {
+  localStorage.setItem(TIME_SLICE_LIST_KEY, JSON.stringify(storage_list))
 }
 
+// display the storage data in the web page
+function disPlayTimeSliceItems() {
+  storage_list.forEach(time_slice_item => {
+    const item = document.createElement('li')
+
+    //use dataset to add new attribute to the item in the time sice list
+    item.dataset.listId = time_slice_item.id;
+
+    item.classList.add('time_slice_item')
+    item.innerText =  `ID: ${time_slice_item.id}, Time Slice: ${time_slice_item.timeSlice}`
+    time_slice_container.appendChild(item)
+
+  });
+}
 
 
 
