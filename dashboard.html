@@ -11,38 +11,82 @@
 <body>
   <div class="time_tracker_container">
     <div class="side_board_for_totally_hidden">
-    <div class="side_board">
-      <div class="logo_img">
-        <img src="img/clockify-logo.svg" alt="logo">
-      </div>
+      <div class="side_board">
+        <div class="logo_img">
+          <img src="img/clockify-logo.svg" alt="logo">
+        </div>
 
-      <div class="side_menu">
-        <ul>
-          <li> <img src="" alt=""> User Name</li>
-          <li><img src="img/time-tracker.svg" alt=""> &nbsp;time tracker</li>
-          <li><img src="img/dashboard.svg" alt=""> &nbsp;dashboard</li>
-          <li><img src="img/reports.svg" alt=""> &nbsp;reports</li>
-          <li><img src="img/projects.svg" alt=""> &nbsp;projects</li>
-          <li><img src="img/teams.svg" alt="">&nbsp;team</li>
-          <li><img src="img/settings.svg" alt=""> &nbsp;settings</li>
-          <li><img src="img/help.svg" alt="">&nbsp;help</li>
-          <li><img src="img/upgrade.svg" alt=""> &nbsp;upgrade</li>
-        </ul>
+        <div class="side_menu">
+          <ul>
+            <div class="user_name">
+              <div class="capital_letter_box">
+                <span class="name_letter"></span>
+              </div>
+              Grace Yu
+            </div>
+            <a class="list_item" href="#">
+              <li>
+                <div class="item_img"><img src="img/time-tracker.svg" alt="">
+                </div>time tracker
+              </li>
+            </a>
+            <a class="list_item" href="#">
+              <li>
+                <div class="item_img"><img src="img/dashboard.svg" alt=""></div>dashboard
+              </li>
+            </a>
+            <a class="list_item" href="#">
+              <li>
+                <div class="item_img"><img src="img/reports.svg" alt=""></div>reports
+              </li>
+            </a>
+            <a class="list_item" href="#">
+              <li>
+                <div class="item_img"><img src="img/projects.svg" alt=""></div>projects
+              </li>
+            </a>
+            <a class="list_item" href="#">
+              <li>
+                <div class="item_img"><img src="img/teams.svg" alt=""></div>team
+              </li>
+            </a>
+            <a class="list_item" href="#">
+              <li>
+                <div class="item_img"><img src="img/settings.svg" alt=""></div>settings
+              </li>
+            </a>
+            <a class="list_item" href="#">
+              <li>
+                <div class="item_img"><img src="img/help.svg" alt=""></div>help
+              </li>
+            </a>
+            <a class="list_item" href="#">
+              <li>
+                <div class="item_img"><img src="img/upgrade.svg" alt=""></div>upgrade
+              </li>
+            </a>
+          </ul>
+        </div>
       </div>
     </div>
-  </div>
     <div class="open_close_btn">&#8249;</div>
     <div class="main_board">
       <div class="start_bar">
         <div class="flex_item frist_half_bar">
         </div>
         <div class="flex_item second_half_bar">
+          <div class="timer_box">
+            <button class="timer">Start</button>
+            <div class="time_counting">00:00:00</div>
+          </div>
         </div>
       </div>
       <div class="time_period_list">
+        <div class="time_slice">id: 1 Slice Time: 0</div>
       </div>
     </div>
   </div>
   <script src="dashboard.js"></script>
 </body>
+
 </html>

@@ -10,7 +10,7 @@
 
 .time_tracker_container {
   position: relative;
-  background-color: rgb(164, 252, 211);
+  background-color: rgba(170, 169, 169, 0.527);
   height: 100vh;
   margin: 0 30px;
   display: flex;
@@ -26,9 +26,9 @@
 }
 
 .side_board {
-  background-color: rgb(136, 227, 255);
+  background-color: rgb(250, 250, 250);
   display: block;
-  padding: 30px;
+  padding: 30px 0;
   position: relative;
   width: 260px;
   height: 100vh;
@@ -37,15 +37,12 @@
   color: rgb(9, 9, 90);
   font-family: "Gill Sans", "Gill Sans MT", "Calibri", "Trebuchet MS",
     sans-serif;
-  text-transform: capitalize;
-  font-size: 18px;
   flex-shrink: 0;
-
 }
 
 .open_close_btn {
   position: fixed;
-  top: 50px;
+  top: 20px;
   width: 13px;
   height: 20px;
   background-color: rgb(177, 117, 99);
@@ -63,21 +60,72 @@
   overflow: hidden;
   width: 0;
 }
+.side_menu .user_name {
+  height: 60px;
+  line-height: 60px;
+}
 
-.side_board li {
-  list-style: none;
-  display: block;
+.user_name .capital_letter_box {
+  position: relative;
+  margin: auto 13px;
+  text-align: center;
+  vertical-align: middle;
+  display: inline-block;
+  width: 40px;
   height: 40px;
-  line-height: 40px;
-  background-color: rgb(201, 201, 201);
+  border-radius: 50px;
+  border: 2px solid green;
+  background-color: green;
+  text-transform: uppercase;
+  color: white;
+}
+
+.capital_letter_box .name_letter {
+  position: absolute;
+  display: flex;
+  height: 100%;
+  width: 100%;
+  align-items: center;
+  justify-content: center;
+}
+
+.side_menu a {
+  list-style: none;
+  display: flex;
+  text-decoration: none;
+  text-transform: uppercase;
+  font-size: 14px;
+  font-weight: 100px;
+  height: 60px;
+  align-items: center;
+  background-color: rgb(228, 242, 250);
+  color: rgba(88, 88, 92, 0.966);
+}
+
+.list_item img {
+  width: 100%;
+  height: 100%;
+}
+
+.list_item .item_img {
+  margin: auto 22px;
+  text-align: center;
+  vertical-align: middle;
+  width: 20px;
+  height: 20px;
+  display: inline-block;
+}
+
+.logo_img {
+  margin-bottom: 30px;
+  margin-left: 20px;
 }
 
 .main_board {
   border: 3px solid blue;
   position: relative;
   display: flex;
-  justify-content: center;
-  background-color: rgb(155, 200, 243);
+flex-direction: column;
   height: 100vh;
   width: 100%;
   flex-grow: 1;
@@ -87,8 +135,7 @@
   position: absolute;
   width: 100%;
   height: 50px;
-  background-color: yellow;
-  border: 2px solid rgb(3, 75, 3);
+
   display: flex;
   justify-content: space-between;
   margin: 30px 0;
@@ -96,7 +143,7 @@
 
 .flex_item {
   position: relative;
-  border: 3px solid rgb(224, 93, 32);
+  border: 1px dashed rgb(224, 93, 32);
   width: 480px;
   height: 48px;
 }
@@ -107,4 +154,45 @@
 
 .second_half_bar {
   flex-shrink: 0;
+}
+
+.time_box {
+  position: relative;
+  width: 100%;
+  height: 100%;
+}
+
+.timer {
+  position: absolute;
+  width: 80px;
+  height: 40px;
+  background-color: rgb(59, 124, 97);
+  right: 0;
+  color:white;
+  font-size:18px;
+  outline-style: none;
+}
+
+.time_counting{
+  position: absolute;
+  width: 150px;
+  height: 40px;
+  border: 3px solid grey;
+  right:90px;
+  font-size:22px;
+ text-align: center;
+ line-height: 30px;
+}
+
+.time_period_list{
+  position: absolute;
+  top:150px;
+  width:100%;
+  height:auto;
+  border: 2px solid green;
+}
+.time_slice{
+  height:30px;
+  border:2px solid orange;
+  font-size: 20px;
 }
