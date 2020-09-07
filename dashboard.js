@@ -15,7 +15,7 @@ const time_slice_container = document.querySelector('.time_slice_container')
 const delete_message_box = document.querySelector('.delete_messageg_box')
 const _alert = document.querySelector('.alert')
 const total_time = document.querySelector('.total_time')
-let Total_t = 0
+
 
 // side board variables
 const user_name = document.querySelector('.user_name')
@@ -91,10 +91,10 @@ function timeFormat(count) {
 function refreshWebPage() {
   clearWebPageContainer(time_slice_container)
   setUpTimeList()
+  let Total_t = 0
   storage_list.forEach(item => {
     Total_t += item.timeSlice
   })
-
    //  console.log(Total_t)
    total_time.textContent = `Total: ${Total_t}`
 }
@@ -103,7 +103,6 @@ function refreshWebPage() {
 function saveDataToLocalStorage() {
   localStorage.setItem(TIME_SLICE_LIST_KEY, JSON.stringify(storage_list))
 }
-
 
 // empty the  web page
 function clearWebPageContainer(container) {
