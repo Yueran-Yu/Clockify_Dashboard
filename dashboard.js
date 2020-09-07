@@ -16,7 +16,6 @@ const delete_message_box = document.querySelector('.delete_messageg_box')
 const _alert = document.querySelector('.alert')
 const total_time = document.querySelector('.total_time')
 
-
 // side board variables
 const user_name = document.querySelector('.user_name')
 const name_letter = document.querySelector('.name_letter')
@@ -55,7 +54,7 @@ start_end_button.addEventListener('click', function () {
 
     temp_record = setInterval(function () {
       count += 1
-      const sec =  secondFormat(count)
+      const sec = secondFormat(count)
       time_counting.textContent = sec
     }, 1000)
   }
@@ -67,7 +66,7 @@ start_end_button.addEventListener('click', function () {
     // console.log(count)
     const newTimeSlice = populateTimeSlice(count)
     storage_list.push(newTimeSlice)
-    console.log(JSON.stringify(storage_list))
+    // console.log(JSON.stringify(storage_list))
     count = 0
     saveDataToLocalStorage()
     refreshWebPage()
@@ -75,33 +74,44 @@ start_end_button.addEventListener('click', function () {
   }
 })
 
+function generateFullDate(){
+  let today = new Date()
+  const min = String(today.getMinutes()).padStart(2, '0')
+  const hh = String(today.getHours()).padStart(2, '0')
+  const hour_style = hh >= 12 ? 'PM' : 'AM'
+  let hour_left = hh % 12
+  hour_left = hour_left ? hour_left : 12
+
+  const dd = String(today.getDate()).padStart(2, '0')
+  const mm = String(today.getMonth() + 1).padStart(2, '0')
+  const yyyy = today.getFullYear()
+  let _today = yyyy + "-" + mm + "-" + dd + "-" + hour_left + ":" + min + hour_style
+  // console.log(_today)
+  return _today
+
+}
+
 // populate an time slice object,which will be add to the local storage container later
 function populateTimeSlice(time_slice) {
-  return {
+  let timeObj = {
     id: Date.now().toString(),
-    timeSlice: time_slice
-  }
+    current_date: generateFullDate(),
+    timeSlice: time_slice}
+  return timeObj
 }
 
 // formart the second
 function secondFormat(count) {
   let date = new Date(null)
   date.setSeconds(count)
-  const result = date.toISOString().substr(11,8)
+  const result = date.toISOString().substr(11, 8)
   return result
 }
 
-// format hour and minite
-function hourMiniteFormat(count){
-  let date = new Date(null)
-  date.setSeconds(count)
-  const result = date.toISOString()
-  return result
-}
-
-// format date
-function dateFormat(count){
-
+// decide the hour is AM or PM
+function AMPMFormat(hour){
+let hour_style = hour >= 12 ? 'PM':'AM'
+return hour_style
 }
 
 // update local storage time slice container, refresh web page
@@ -113,8 +123,8 @@ function refreshWebPage() {
     Total_t += item.timeSlice
   })
   const total_time_formated = secondFormat(Total_t)
-   //  console.log(Total_t)
-   total_time.textContent = `Total: ${total_time_formated}`
+  //  console.log(Total_t)
+  total_time.textContent = `Total: ${total_time_formated}`
 }
 
 // save time slice to local storage: key value
@@ -132,22 +142,23 @@ function clearWebPageContainer(container) {
 // set up items
 function setUpTimeList() {
   // console.log(storage_list.length)
+  // console.log(storage_list)
   if (storage_list.length > 0) {
     storage_list.forEach(item => {
-      disPlayTimeItems(item.id, item.timeSlice)
+
+      disPlayTimeItems(item.current_date, item.id, item.timeSlice)
     })
   }
 }
 
 // display the storage data in the web page
-function disPlayTimeItems(id, value) {
+function disPlayTimeItems(date, id, value) {
   // console.log(id + " " + value)
 
   const item = document.createElement('li')
   const deleteATage = document.createElement('a')
   const seconds = secondFormat(value)
-  const _time = hourMiniteFormat(id)
-  const textNode = document.createTextNode(`${seconds}`)
+  const textNode = document.createTextNode(`Current: ${date}   Time: ${seconds}`)
   const deleteNode = document.createTextNode("delete")
   item.classList.add('time_slice_item')
   deleteATage.classList.add('delete_button')
@@ -186,6 +197,8 @@ function alertBox(message, action) {
     _alert.classList.add('delete_box_hidden')
   }), 2000)
 }
+
+
 
 
 
