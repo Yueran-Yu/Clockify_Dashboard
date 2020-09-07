@@ -55,7 +55,8 @@ start_end_button.addEventListener('click', function () {
 
     temp_record = setInterval(function () {
       count += 1
-      time_counting.textContent = count
+      const sec =  secondFormat(count)
+      time_counting.textContent = sec
     }, 1000)
   }
   else {
