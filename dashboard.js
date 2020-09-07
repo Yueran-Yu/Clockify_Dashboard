@@ -14,7 +14,8 @@ let storage_list = JSON.parse(localStorage.getItem(TIME_SLICE_LIST_KEY)) || [];
 const time_slice_container = document.querySelector('.time_slice_container')
 const delete_message_box = document.querySelector('.delete_messageg_box')
 const _alert = document.querySelector('.alert')
-
+const total_time = document.querySelector('.total_time')
+let Total_t = 0
 
 // side board variables
 const user_name = document.querySelector('.user_name')
@@ -90,6 +91,11 @@ function timeFormat(count) {
 function refreshWebPage() {
   clearWebPageContainer(time_slice_container)
   setUpTimeList()
+  storage_list.forEach(item => {
+    Total_t += item.timeSlice
+  })
+   //  console.log(Total_t)
+   total_time.textContent = `Total: ${Total_t}`
 }
 
 // save time slice to local storage: key value
@@ -159,6 +165,10 @@ function alertBox(message, action) {
     _alert.classList.add('delete_box_hidden')
   }), 2000)
 }
+
+
+
+
 
 
 

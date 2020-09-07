@@ -10,7 +10,7 @@
 
 .time_tracker_container {
   position: relative;
-  background-color: rgba(170, 169, 169, 0.527);
+  background-color: rgba(184, 184, 184, 0.527);
   height: 100vh;
   margin: 0 30px;
   display: flex;
@@ -123,7 +123,7 @@
 }
 
 .main_board {
-  border: 3px solid blue;
+  border: 2px solid rgb(126, 126, 235);
   position: relative;
   display: flex;
   flex-direction: column;
@@ -188,7 +188,7 @@
 
 .time_slice_container {
   position: absolute;
-  top: 150px;
+  top: 200px;
   width: 100%;
   height: auto;
   border: 2px solid green;
@@ -269,13 +269,26 @@
   position: absolute;
   width: 100%;
   height: 40px;
-  top: 110px;
+  top: 120px;
   line-height: 40px;
   text-align: center;
   background-color: #dfffef;
 }
 
 .success {
-  font-size:20px;
-  color:rgb(36, 131, 36);
+  font-size: 20px;
+  color: rgb(36, 131, 36);
+}
+
+.total_time {
+  position: absolute;
+  width: 100%;
+  height: 40px;
+  top: 160px;
+  background-color: rgb(255, 217, 174);
+  text-align: end;
+  padding-right:20px;
+  line-height: 40px;
+  font-size: 22px;
+  color: rgb(1, 107, 107);
 }
