@@ -82,9 +82,25 @@ function populateTimeSlice(time_slice) {
   }
 }
 
-// formart the time slice
-function timeFormat(count) {
-  return
+// formart the second
+function secondFormat(count) {
+  let date = new Date(null)
+  date.setSeconds(count)
+  const result = date.toISOString().substr(11,8)
+  return result
+}
+
+// format hour and minite
+function hourMiniteFormat(count){
+  let date = new Date(null)
+  date.setSeconds(count)
+  const result = date.toISOString()
+  return result
+}
+
+// format date
+function dateFormat(count){
+
 }
 
 // update local storage time slice container, refresh web page
@@ -95,8 +111,9 @@ function refreshWebPage() {
   storage_list.forEach(item => {
     Total_t += item.timeSlice
   })
+  const total_time_formated = secondFormat(Total_t)
    //  console.log(Total_t)
-   total_time.textContent = `Total: ${Total_t}`
+   total_time.textContent = `Total: ${total_time_formated}`
 }
 
 // save time slice to local storage: key value
@@ -124,9 +141,12 @@ function setUpTimeList() {
 // display the storage data in the web page
 function disPlayTimeItems(id, value) {
   // console.log(id + " " + value)
+
   const item = document.createElement('li')
   const deleteATage = document.createElement('a')
-  const textNode = document.createTextNode(`ID: ${id}, Time Slice: ${value}`)
+  const seconds = secondFormat(value)
+  const _time = hourMiniteFormat(id)
+  const textNode = document.createTextNode(`${seconds}`)
   const deleteNode = document.createTextNode("delete")
   item.classList.add('time_slice_item')
   deleteATage.classList.add('delete_button')

@@ -8,6 +8,11 @@
   --g_transition: all 0.3s ease;
 }
 
+body{
+  font-family: "Avantgarde", "TeX Gyre Adventor", "URW Gothic L", sans-serif;
+  color:rgb(63, 63, 63);
+}
+
 .time_tracker_container {
   position: relative;
   background-color: rgba(184, 184, 184, 0.527);
@@ -201,6 +206,7 @@
   border: 2px solid orange;
   font-size: 20px;
   line-height: 40px;
+  text-align: center;
 }
 
 .time_slice_item .delete_button {
@@ -290,5 +296,7 @@
   padding-right:20px;
   line-height: 40px;
   font-size: 22px;
-  color: rgb(1, 107, 107);
+  color: rgb(1, 68, 107);
 }
+
+
