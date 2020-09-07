@@ -1,6 +1,5 @@
 window.addEventListener('load', function () {
-  clearWebPageContainer(time_slice_container)
-  setUpTimeList()
+  refreshWebPage()
 })
 
 const start_end_button = document.querySelector('.timer')
@@ -12,7 +11,6 @@ const SELECTED_TIME_SLICE_ID_KEY = 'time_slice_id';
 
 // time slice display board variables
 let storage_list = JSON.parse(localStorage.getItem(TIME_SLICE_LIST_KEY)) || [];
-let selectedListId = localStorage.getItem(SELECTED_TIME_SLICE_ID_KEY);
 const time_slice_container = document.querySelector('.time_slice_container')
 const delete_message_box = document.querySelector('.delete_messageg_box')
 
@@ -69,9 +67,7 @@ start_end_button.addEventListener('click', function () {
     console.log(JSON.stringify(storage_list))
     count = 0
     saveDataToLocalStorage()
-    updateTimeSliceContainer()
-    clearWebPageContainer(time_slice_container)
-    disPlayTimeSliceItems()
+    refreshWebPage()
   }
 })
 
@@ -88,14 +84,23 @@ function timeFormat(count) {
   return
 }
 
-// update local storage time slice container, clear the
-function updateTimeSliceContainer() {
-  return
+// update local storage time slice container, refresh web page
+function refreshWebPage() {
+  clearWebPageContainer(time_slice_container)
+  setUpTimeList()
 }
 
 // save time slice to local storage: key value
 function saveDataToLocalStorage() {
   localStorage.setItem(TIME_SLICE_LIST_KEY, JSON.stringify(storage_list))
+}
+
+
+// empty the  web page
+function clearWebPageContainer(container) {
+  while (container.firstChild) {
+    container.removeChild(container.firstChild)
+  }
 }
 
 // set up items
@@ -121,27 +126,27 @@ function disPlayTimeItems(id, value) {
   item.appendChild(textNode)
   deleteATage.appendChild(deleteNode)
   //use dataset to add new attribute to the item in the time sice list
-  item.dataset.listId = id;
+  item.dataset.id = id;
   time_slice_container.appendChild(item)
 
   const delete_btn = item.querySelector('.delete_button')
 
   // console.log(delete_btn)
   delete_btn.addEventListener('click', function (e) {
-    console.log(e.target.parent)
-    delete_message_box.classList.remove('delete_box_hidden')
-
-
+    // console.log(e.target.parentElement)
+    const deleteItem = e.target.parentElement
+    const id = deleteItem.dataset.id
+    // console.log(id)
+    storage_list = storage_list.filter(item => item.id !== id);
+    // console.log(storage_list)
+    saveDataToLocalStorage()
+    //  console.log(storage_list)
+    refreshWebPage()
   })
 }
 
 
 
-function clearWebPageContainer(container) {
-  while (container.firstChild) {
-    container.removeChild(container.firstChild)
-  }
-}
 
 
 

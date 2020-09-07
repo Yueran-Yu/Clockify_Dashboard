@@ -213,7 +213,7 @@
   height: 30px;
   color: white;
   text-align: center;
-  background-color: rgb(17, 91, 139);
+  background-color: rgb(24, 95, 189);
   border-radius: 5px;
   cursor: pointer;
   line-height: 30px;
@@ -263,5 +263,9 @@ text-align: center;
 
 .delete_box_hidden
 {display: none;
+
+}
+
+.alert{
 
 }
