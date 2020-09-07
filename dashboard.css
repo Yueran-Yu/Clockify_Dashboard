@@ -229,43 +229,53 @@
 }
 
 .cancel_delete {
-position: absolute;
-width: 90%;
-height:40px;
-bottom: 0;
-text-align: right;
+  position: absolute;
+  width: 90%;
+  height: 40px;
+  bottom: 0;
+  text-align: right;
 }
 
-.cancel_delete .cancel_btn{
+.cancel_delete .cancel_btn {
   width: 25%;
-  height:30px;
+  height: 30px;
   cursor: pointer;
 }
 
-.cancel_delete .box_delete_btn{
+.cancel_delete .box_delete_btn {
   width: 25%;
-  height:30px;
+  height: 30px;
   cursor: pointer;
 }
 
-.delete_message{
+.delete_message {
   position: absolute;
-  height:30px;
-  width:100%;
-  top:40%;
-text-align: center;
+  height: 30px;
+  width: 100%;
+  top: 40%;
+  text-align: center;
 }
-.close_delete{
+.close_delete {
   position: absolute;
-  top:5px;
-  right:5px;
+  top: 5px;
+  right: 5px;
 }
 
-.delete_box_hidden
-{display: none;
-
+.delete_box_hidden {
+  display: none;
 }
 
-.alert{
+.alert {
+  position: absolute;
+  width: 100%;
+  height: 40px;
+  top: 110px;
+  line-height: 40px;
+  text-align: center;
+  background-color: #dfffef;
+}
 
+.success {
+  font-size:20px;
+  color:rgb(36, 131, 36);
 }

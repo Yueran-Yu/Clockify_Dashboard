@@ -13,6 +13,7 @@ const SELECTED_TIME_SLICE_ID_KEY = 'time_slice_id';
 let storage_list = JSON.parse(localStorage.getItem(TIME_SLICE_LIST_KEY)) || [];
 const time_slice_container = document.querySelector('.time_slice_container')
 const delete_message_box = document.querySelector('.delete_messageg_box')
+const _alert = document.querySelector('.alert')
 
 
 // side board variables
@@ -68,6 +69,7 @@ start_end_button.addEventListener('click', function () {
     count = 0
     saveDataToLocalStorage()
     refreshWebPage()
+    alertBox('New Time Slice Added Successfully!', 'success')
   }
 })
 
@@ -138,11 +140,24 @@ function disPlayTimeItems(id, value) {
     const id = deleteItem.dataset.id
     // console.log(id)
     storage_list = storage_list.filter(item => item.id !== id);
+    alertBox('Successfully delete the Time Slice.', 'success')
     // console.log(storage_list)
     saveDataToLocalStorage()
     //  console.log(storage_list)
     refreshWebPage()
   })
+}
+
+// display alart box
+function alertBox(message, action) {
+  _alert.textContent = message
+  _alert.classList.remove('delete_box_hidden')
+  _alert.classList.add(action)
+
+  setTimeout((() => {
+    _alert.textContent = ''
+    _alert.classList.add('delete_box_hidden')
+  }), 2000)
 }
 
 
