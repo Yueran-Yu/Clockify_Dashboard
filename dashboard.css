@@ -60,6 +60,7 @@
   overflow: hidden;
   width: 0;
 }
+
 .side_menu .user_name {
   height: 60px;
   line-height: 60px;
@@ -125,7 +126,7 @@
   border: 3px solid blue;
   position: relative;
   display: flex;
-flex-direction: column;
+  flex-direction: column;
   height: 100vh;
   width: 100%;
   flex-grow: 1;
@@ -168,32 +169,100 @@ flex-direction: column;
   height: 40px;
   background-color: rgb(59, 124, 97);
   right: 0;
-  color:white;
-  font-size:18px;
+  color: white;
+  font-size: 18px;
   outline-style: none;
+  cursor: pointer;
 }
 
-.time_counting{
+.time_counting {
   position: absolute;
   width: 150px;
   height: 40px;
   border: 3px solid grey;
-  right:90px;
-  font-size:22px;
- text-align: center;
- line-height: 30px;
+  right: 90px;
+  font-size: 22px;
+  text-align: center;
+  line-height: 30px;
 }
 
-.time_slice_container{
+.time_slice_container {
   position: absolute;
-  top:150px;
-  width:100%;
-  height:auto;
+  top: 150px;
+  width: 100%;
+  height: auto;
   border: 2px solid green;
   list-style: none;
 }
-.time_slice_item{
-  height:30px;
-  border:2px solid orange;
+
+.time_slice_item {
+  display: relative;
+  height: 40px;
+  border: 2px solid orange;
   font-size: 20px;
+  line-height: 40px;
+}
+
+.time_slice_item .delete_button {
+  position: absolute;
+  right: 10px;
+  display: inline-block;
+  text-decoration: none;
+  vertical-align: center;
+  width: 80px;
+  height: 30px;
+  color: white;
+  text-align: center;
+  background-color: rgb(17, 91, 139);
+  border-radius: 5px;
+  cursor: pointer;
+  line-height: 30px;
+}
+
+.delete_messageg_box {
+  position: fixed;
+  width: 300px;
+  height: 200px;
+  background-color: rgb(250, 241, 241);
+  left: 45%;
+  top: 40%;
+}
+
+.cancel_delete {
+position: absolute;
+width: 90%;
+height:40px;
+bottom: 0;
+text-align: right;
+}
+
+.cancel_delete .cancel_btn{
+  width: 25%;
+  height:30px;
+  cursor: pointer;
+}
+
+.cancel_delete .delete_btn{
+  width: 25%;
+  height:30px;
+  cursor: pointer;
+}
+
+.delete_message{
+  position: absolute;
+  height:30px;
+  width:100%;
+  top:40%;
+text-align: center;
+}
+.close_delete{
+
+  position: absolute;
+  top:5px;
+  right:5px;
+}
+
+.delete_box_hidden
+{display: none;
+
 }

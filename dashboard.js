@@ -1,5 +1,6 @@
 window.addEventListener('load', function () {
-  disPlayTimeSliceItems()
+  clearWebPageContainer(time_slice_container)
+  setUpTimeList()
 })
 
 const start_end_button = document.querySelector('.timer')
@@ -9,12 +10,14 @@ let count = 0
 const TIME_SLICE_LIST_KEY = 'time_slice_item';
 const SELECTED_TIME_SLICE_ID_KEY = 'time_slice_id';
 
-// time slice container
+// time slice display board variables
 let storage_list = JSON.parse(localStorage.getItem(TIME_SLICE_LIST_KEY)) || [];
 let selectedListId = localStorage.getItem(SELECTED_TIME_SLICE_ID_KEY);
 const time_slice_container = document.querySelector('.time_slice_container')
+const delete_message_box = document.querySelector('.delete_messageg_box')
 
 
+// side board variables
 const user_name = document.querySelector('.user_name')
 const name_letter = document.querySelector('.name_letter')
 const trim_name = user_name.textContent.trim()
@@ -25,14 +28,12 @@ const side_board_for_totally_hidden = document.querySelector('.side_board_for_to
 
 open_close_btn.addEventListener('mouseover', () => {
   open_close_btn.style.width = "20px"
-
 })
 open_close_btn.addEventListener('mouseout', () => {
   open_close_btn.style.width = "13px"
 })
 
 open_close_btn.addEventListener('click', function () {
-
   if (!side_board_for_totally_hidden.classList.contains("toggle_side_bar")) {
     side_board_for_totally_hidden.classList.add('toggle_side_bar')
     open_close_btn.style.left = "0px"
@@ -69,6 +70,7 @@ start_end_button.addEventListener('click', function () {
     count = 0
     saveDataToLocalStorage()
     updateTimeSliceContainer()
+    clearWebPageContainer(time_slice_container)
     disPlayTimeSliceItems()
   }
 })
@@ -96,26 +98,47 @@ function saveDataToLocalStorage() {
   localStorage.setItem(TIME_SLICE_LIST_KEY, JSON.stringify(storage_list))
 }
 
+// set up items
+function setUpTimeList() {
+  // console.log(storage_list.length)
+  if(storage_list.length > 0){
+    storage_list.forEach(item =>{
+      disPlayTimeItems(item.id, item.timeSlice)
+    })
+  }
+}
+
 // display the storage data in the web page
-function disPlayTimeSliceItems() {
-  storage_list.forEach(time_slice_item => {
+function disPlayTimeItems(id, value) {
+  // console.log(id + " " + value)
     const item = document.createElement('li')
-
-    //use dataset to add new attribute to the item in the time sice list
-    item.dataset.listId = time_slice_item.id;
-
+    const deleteATage = document.createElement('a')
+    const textNode = document.createTextNode(`ID: ${id}, Time Slice: ${value}`)
+    const deleteNode = document.createTextNode("delete")
     item.classList.add('time_slice_item')
-    item.innerText =  `ID: ${time_slice_item.id}, Time Slice: ${time_slice_item.timeSlice}`
+    deleteATage.classList.add('delete_button')
+    item.appendChild(deleteATage)
+    item.appendChild(textNode)
+    deleteATage.appendChild(deleteNode)
+    //use dataset to add new attribute to the item in the time sice list
+    item.dataset.listId = id;
     time_slice_container.appendChild(item)
+    const delete_btn  = document.querySelector('.delete_button')
+    // console.log(btn)
 
-  });
+
+delete_btn.addEventListener('click', function(e){
+console.log(e.target)
+})
 }
 
 
 
-
-
-
+function clearWebPageContainer(container) {
+  while (container.firstChild) {
+    container.removeChild(container.firstChild)
+  }
+}
 
 
 
