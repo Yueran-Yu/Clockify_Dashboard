@@ -94,6 +94,7 @@ function refreshWebPage() {
   storage_list.forEach(item => {
     Total_t += item.timeSlice
   })
+
    //  console.log(Total_t)
    total_time.textContent = `Total: ${Total_t}`
 }
