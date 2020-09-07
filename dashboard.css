@@ -223,7 +223,7 @@
   position: fixed;
   width: 300px;
   height: 200px;
-  background-color: rgb(250, 241, 241);
+  background-color: #3dc782;
   left: 45%;
   top: 40%;
 }
@@ -242,7 +242,7 @@ text-align: right;
   cursor: pointer;
 }
 
-.cancel_delete .delete_btn{
+.cancel_delete .box_delete_btn{
   width: 25%;
   height:30px;
   cursor: pointer;
@@ -256,7 +256,6 @@ text-align: right;
 text-align: center;
 }
 .close_delete{
-
   position: absolute;
   top:5px;
   right:5px;

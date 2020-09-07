@@ -101,8 +101,8 @@ function saveDataToLocalStorage() {
 // set up items
 function setUpTimeList() {
   // console.log(storage_list.length)
-  if(storage_list.length > 0){
-    storage_list.forEach(item =>{
+  if (storage_list.length > 0) {
+    storage_list.forEach(item => {
       disPlayTimeItems(item.id, item.timeSlice)
     })
   }
@@ -111,25 +111,28 @@ function setUpTimeList() {
 // display the storage data in the web page
 function disPlayTimeItems(id, value) {
   // console.log(id + " " + value)
-    const item = document.createElement('li')
-    const deleteATage = document.createElement('a')
-    const textNode = document.createTextNode(`ID: ${id}, Time Slice: ${value}`)
-    const deleteNode = document.createTextNode("delete")
-    item.classList.add('time_slice_item')
-    deleteATage.classList.add('delete_button')
-    item.appendChild(deleteATage)
-    item.appendChild(textNode)
-    deleteATage.appendChild(deleteNode)
-    //use dataset to add new attribute to the item in the time sice list
-    item.dataset.listId = id;
-    time_slice_container.appendChild(item)
-    const delete_btn  = document.querySelector('.delete_button')
-    // console.log(btn)
+  const item = document.createElement('li')
+  const deleteATage = document.createElement('a')
+  const textNode = document.createTextNode(`ID: ${id}, Time Slice: ${value}`)
+  const deleteNode = document.createTextNode("delete")
+  item.classList.add('time_slice_item')
+  deleteATage.classList.add('delete_button')
+  item.appendChild(deleteATage)
+  item.appendChild(textNode)
+  deleteATage.appendChild(deleteNode)
+  //use dataset to add new attribute to the item in the time sice list
+  item.dataset.listId = id;
+  time_slice_container.appendChild(item)
+
+  const delete_btn = item.querySelector('.delete_button')
+
+  // console.log(delete_btn)
+  delete_btn.addEventListener('click', function (e) {
+    console.log(e.target.parent)
+    delete_message_box.classList.remove('delete_box_hidden')
 
 
-delete_btn.addEventListener('click', function(e){
-console.log(e.target)
-})
+  })
 }
 
 
