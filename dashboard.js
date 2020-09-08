@@ -1,13 +1,15 @@
 window.addEventListener('load', function () {
   refreshWebPage()
 })
-
+const _week = new Array("Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat");
+const _month = new Array('Jan', 'Feb', 'Mar', 'Apr', 'May', 'June', 'July', 'Aug', 'Sept', 'Oct', 'Nov', 'Dec')
 const start_end_button = document.querySelector('.timer')
 const time_counting = document.querySelector('.time_counting')
 let temp_record
 let count = 0
-const TIME_SLICE_LIST_KEY = 'time_slice_item';
-const SELECTED_TIME_SLICE_ID_KEY = 'time_slice_id';
+const TIME_SLICE_LIST_KEY = 'time_slice_item'
+const SELECTED_TIME_SLICE_ID_KEY = 'time_slice_id'
+let today = new Date()
 
 // time slice display board variables
 let storage_list = JSON.parse(localStorage.getItem(TIME_SLICE_LIST_KEY)) || [];
@@ -47,12 +49,14 @@ open_close_btn.addEventListener('click', function () {
 
 // ========= timer section ===========
 // populate an time slice object,which will be add to the local storage container later
-function populateTimeSlice(startDate, time_slice) {
+function populateTimeSlice(startDate, timeSlice) {
   let timeObj = {
     id: Date.now().toString(),
+    year_month_day: generateYearMonthDay(),
+    day: generateWeekDay(),
     start_date: startDate,
     end_date: generateFullDate(),
-    timeSlice: time_slice
+    time_slice: timeSlice
   }
   return timeObj
 }
@@ -63,8 +67,9 @@ start_end_button.addEventListener('click', function () {
   if (start_end_button.textContent.toLowerCase() === "start") {
     start_end_button.textContent = "Stop"
     start_end_button.style.backgroundColor = "red";
+    // storage_list[storage_list.length]['start_date'] = generateFullDate()
     start_d = generateFullDate()
-    console.log(start_d)
+    // console.log(start_d)
     temp_record = setInterval(function () {
       count += 1
       const sec = secondFormat(count)
@@ -88,28 +93,119 @@ start_end_button.addEventListener('click', function () {
   }
 })
 
+
+// populate week
+function populateWeekWord(week_number) {
+  let week_word = null
+
+  switch (week_number) {
+    case 0:
+      week_word = "Sun"
+      break
+    case 1:
+      week_word = "Mon"
+      break
+    case 2:
+      week_word = "Tue"
+      break
+    case 3:
+      week_word = "Wed"
+      break
+    case 4:
+      week_word = "Thu"
+      break
+    case 5:
+      week_word = "Fri"
+      break
+    case 6:
+      week_word = "Sat"
+  }
+  return week_word
+}
+
+// populate month
+function populateMonthWord(date_number) {
+  let date_word = null
+  switch (date_number) {
+    case 0:
+      date_word = "Jan"
+      break
+    case 1:
+      date_word = "Feb"
+      break
+    case 2:
+      date_word = "Mar"
+      break
+    case 3:
+      date_word = "Apr"
+      break
+    case 4:
+      date_word = "May"
+      break
+    case 5:
+      date_word = "June"
+      break
+    case 6:
+      date_word = "July"
+      break
+    case 7:
+      date_word = "Aug"
+      break
+    case 8:
+      date_word = "Sept"
+      break
+    case 9:
+      date_word = "Oct"
+      break
+    case 10:
+      date_word = "Nov"
+      break
+    case 11:
+      date_word = "Dec"
+  }
+  return date_word
+}
+
+// generate week
+function generateWeekDay() {
+  return String(today.getDay())
+
+}
+
+// generate date
+function generateYearMonthDay() {
+  let yearMonthDay = null
+  const dd = String(today.getDate()).padStart(2, '0')
+  const mm = String(today.getMonth() + 1).padStart(2, '0')
+  const yyyy = today.getFullYear()
+  yearMonthDay = yyyy + "-" + mm + "-" + dd
+  return yearMonthDay
+}
+
 function generateFullDate() {
-  let today = new Date()
-  const sec = String(today.getSeconds()).padStart(2,'0')
+  const sec = String(today.getSeconds()).padStart(2, '0')
   const min = String(today.getMinutes()).padStart(2, '0')
   const hh = String(today.getHours()).padStart(2, '0')
   const hour_style = hh >= 12 ? 'PM' : 'AM'
   let hour_left = hh % 12
   hour_left = hour_left ? hour_left : 12
-  const dd = String(today.getDate()).padStart(2, '0')
-  const mm = String(today.getMonth() + 1).padStart(2, '0')
-  const yyyy = today.getFullYear()
-  let _today = yyyy + "-" + mm + "-" + dd + "-" + hour_left + ":" + min + ":"+ sec + hour_style
+
+  let _today = hour_left + ":" + min + ":" + sec + hour_style
   // console.log(_today)
   return _today
 }
 
 // formart the second
 function secondFormat(count) {
-  let date = new Date(null)
-  date.setSeconds(count)
-  const result = date.toISOString().substr(11, 8)
-  return result
+    let hours = Math.floor(count / 3600)
+    count = count % 3600
+    let minutes = Math.floor(count / 60)
+    let seconds = count % 60
+    hours = hours >= 10 ? hours : "0" + hours
+    minutes = minutes >= 10 ? minutes : "0" + minutes
+    seconds = seconds >= 10 ? seconds : "0" + seconds
+    let formartted_time = hours + ":" + minutes + ":" + seconds
+  return formartted_time
 }
 
 // decide the hour is AM or PM
@@ -124,7 +220,7 @@ function refreshWebPage() {
   setUpTimeList()
   let Total_t = 0
   storage_list.forEach(item => {
-    Total_t += item.timeSlice
+    Total_t += item.time_slice
   })
 
   const total_time_formated = secondFormat(Total_t)
@@ -149,7 +245,7 @@ function setUpTimeList() {
   // console.log(storage_list.length)
   if (storage_list.length > 0) {
     storage_list.forEach(item => {
-      disPlayTimeItems(item.id, item.start_date, item.end_date, item.timeSlice)
+      disPlayTimeItems(item.id, item.start_date, item.end_date, item.time_slice)
     })
   }
 }
@@ -189,12 +285,12 @@ function disPlayTimeItems(id, start_date, end_date, value) {
 // display alart box
 function alertBox(message, action) {
   _alert.textContent = message
-  _alert.classList.remove('delete_box_hidden')
+  _alert.classList.remove('box_hidden')
   _alert.classList.add(action)
 
   setTimeout((() => {
     _alert.textContent = ''
-    _alert.classList.add('delete_box_hidden')
+    _alert.classList.add('box_hidden')
   }), 2000)
 }
 

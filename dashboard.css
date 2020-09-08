@@ -172,7 +172,7 @@ body{
   position: absolute;
   width: 80px;
   height: 40px;
-  background-color: rgb(59, 124, 97);
+  background-color: rgb(50, 141, 80);
   right: 0;
   color: white;
   font-size: 18px;
@@ -267,7 +267,7 @@ body{
   right: 5px;
 }
 
-.delete_box_hidden {
+.box_hidden {
   display: none;
 }
 
@@ -291,7 +291,7 @@ body{
   width: 100%;
   height: 40px;
   top: 160px;
-  background-color: rgb(255, 217, 174);
+  background-color: rgb(233, 255, 174);
   text-align: end;
   padding-right:20px;
   line-height: 40px;
