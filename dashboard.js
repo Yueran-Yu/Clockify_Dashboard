@@ -44,14 +44,27 @@ open_close_btn.addEventListener('click', function () {
   }
 })
 
-// ========= timer section =======
+// ========= timer section ===========
+// populate an time slice object,which will be add to the local storage container later
+function populateTimeSlice(startDate, time_slice) {
+  let timeObj = {
+    id: Date.now().toString(),
+    start_date: startDate,
+    end_date: generateFullDate(),
+    timeSlice: time_slice
+  }
+  return timeObj
+}
 
 // click event, when click the start-stop button, the time slice will be created
 start_end_button.addEventListener('click', function () {
+  const start_d = generateFullDate()
   if (start_end_button.textContent.toLowerCase() === "start") {
     start_end_button.textContent = "Stop"
     start_end_button.style.backgroundColor = "red";
+    // storage_list[storage_list.length]['start_date'] = generateFullDate()
 
+    console.log(start_d)
     temp_record = setInterval(function () {
       count += 1
       const sec = secondFormat(count)
@@ -64,8 +77,9 @@ start_end_button.addEventListener('click', function () {
     clearInterval(temp_record)
     time_counting.textContent = "00:00:00"
     // console.log(count)
-    const newTimeSlice = populateTimeSlice(count)
+    const newTimeSlice = populateTimeSlice(start_d, count)
     storage_list.push(newTimeSlice)
+    console.log(storage_list)
     // console.log(JSON.stringify(storage_list))
     count = 0
     saveDataToLocalStorage()
@@ -74,30 +88,20 @@ start_end_button.addEventListener('click', function () {
   }
 })
 
-function generateFullDate(){
+function generateFullDate() {
   let today = new Date()
+  const sec = String(today.getSeconds()).padStart(2,'0')
   const min = String(today.getMinutes()).padStart(2, '0')
   const hh = String(today.getHours()).padStart(2, '0')
   const hour_style = hh >= 12 ? 'PM' : 'AM'
   let hour_left = hh % 12
   hour_left = hour_left ? hour_left : 12
-
   const dd = String(today.getDate()).padStart(2, '0')
   const mm = String(today.getMonth() + 1).padStart(2, '0')
   const yyyy = today.getFullYear()
-  let _today = yyyy + "-" + mm + "-" + dd + "-" + hour_left + ":" + min + hour_style
+  let _today = yyyy + "-" + mm + "-" + dd + "-" + hour_left + ":" + min + ":"+ sec + hour_style
   // console.log(_today)
   return _today
-
-}
-
-// populate an time slice object,which will be add to the local storage container later
-function populateTimeSlice(time_slice) {
-  let timeObj = {
-    id: Date.now().toString(),
-    current_date: generateFullDate(),
-    timeSlice: time_slice}
-  return timeObj
 }
 
 // formart the second
@@ -109,9 +113,9 @@ function secondFormat(count) {
 }
 
 // decide the hour is AM or PM
-function AMPMFormat(hour){
-let hour_style = hour >= 12 ? 'PM':'AM'
-return hour_style
+function AMPMFormat(hour) {
+  let hour_style = hour >= 12 ? 'PM' : 'AM'
+  return hour_style
 }
 
 // update local storage time slice container, refresh web page
@@ -122,6 +126,7 @@ function refreshWebPage() {
   storage_list.forEach(item => {
     Total_t += item.timeSlice
   })
+
   const total_time_formated = secondFormat(Total_t)
   //  console.log(Total_t)
   total_time.textContent = `Total: ${total_time_formated}`
@@ -142,23 +147,20 @@ function clearWebPageContainer(container) {
 // set up items
 function setUpTimeList() {
   // console.log(storage_list.length)
-  // console.log(storage_list)
   if (storage_list.length > 0) {
     storage_list.forEach(item => {
-
-      disPlayTimeItems(item.current_date, item.id, item.timeSlice)
+      disPlayTimeItems(item.id, item.start_date, item.end_date, item.timeSlice)
     })
   }
 }
 
 // display the storage data in the web page
-function disPlayTimeItems(date, id, value) {
+function disPlayTimeItems(id, start_date, end_date, value) {
   // console.log(id + " " + value)
-
   const item = document.createElement('li')
   const deleteATage = document.createElement('a')
   const seconds = secondFormat(value)
-  const textNode = document.createTextNode(`Current: ${date}   Time: ${seconds}`)
+  const textNode = document.createTextNode(`Start Date: ${start_date} End Date: ${end_date}  Time: ${seconds}`)
   const deleteNode = document.createTextNode("delete")
   item.classList.add('time_slice_item')
   deleteATage.classList.add('delete_button')
@@ -168,9 +170,7 @@ function disPlayTimeItems(date, id, value) {
   //use dataset to add new attribute to the item in the time sice list
   item.dataset.id = id;
   time_slice_container.appendChild(item)
-
   const delete_btn = item.querySelector('.delete_button')
-
   // console.log(delete_btn)
   delete_btn.addEventListener('click', function (e) {
     // console.log(e.target.parentElement)
