@@ -15,6 +15,7 @@ const time_slice_container = document.querySelector('.time_slice_container')
 const delete_message_box = document.querySelector('.delete_messageg_box')
 const _alert = document.querySelector('.alert')
 const total_time = document.querySelector('.total_time')
+let start_d = null
 
 // side board variables
 const user_name = document.querySelector('.user_name')
@@ -58,12 +59,11 @@ function populateTimeSlice(startDate, time_slice) {
 
 // click event, when click the start-stop button, the time slice will be created
 start_end_button.addEventListener('click', function () {
-  const start_d = generateFullDate()
+
   if (start_end_button.textContent.toLowerCase() === "start") {
     start_end_button.textContent = "Stop"
     start_end_button.style.backgroundColor = "red";
-    // storage_list[storage_list.length]['start_date'] = generateFullDate()
-
+    start_d = generateFullDate()
     console.log(start_d)
     temp_record = setInterval(function () {
       count += 1
