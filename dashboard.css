@@ -200,6 +200,10 @@ body{
   list-style: none;
 }
 
+ul{
+  list-style: none;
+}
+
 .time_slice_item {
   display: relative;
   height: 40px;
